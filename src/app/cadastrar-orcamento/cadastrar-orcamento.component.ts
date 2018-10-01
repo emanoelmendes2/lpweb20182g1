@@ -63,4 +63,14 @@ export class CadastrarOrcamentoComponent implements OnInit {
     };
     this.total_orcamento = this.orcamentos.calcular(orcamento);
   }
+
+  ExcluirMobilia(mobilia){
+    for (let mob of this.mobilias){
+      if (mob === mobilia){
+        console.log(mob);
+       let posicao = this.mobilias.indexOf(mob);
+       this.mobilias.splice(posicao,1);
+      }
+    }
+  }
 }

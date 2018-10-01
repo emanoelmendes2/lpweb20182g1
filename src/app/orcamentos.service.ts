@@ -28,10 +28,26 @@ export class OrcamentosService {
     ]
   }];
   constructor() { }
+
+
   salvar(orcamento) {
     orcamento.id = this.orcamentos.length + 1;
     this.orcamentos.push(orcamento);
+
+    let orca = [];
+    if(localStorage.getItem('orcamentos') === null){
+      orca.push(orcamento);
+      localStorage.setItem('orcamentos', JSON.stringify(orca));
+    }
+    else{
+      orca = JSON.parse(localStorage.getItem('orcamentos'));
+      orca.push(orcamento);
+      localStorage.setItem('orcamentos', JSON.stringify(orca));
+    }
   }
+
+  
+
   calcular(orcamento) {
     let somatorio = 0;
     for (let peca of orcamento.pecas) {
@@ -63,6 +79,7 @@ export class OrcamentosService {
     orcamento.custo_total = somatorio * 1.25;
     return orcamento.custo_total;
   }
+  
   encontrar(id) {
     // return this.orcamentos.find(orcamento => orcamento.id === id);
     for (let orcamento of this.orcamentos) {
